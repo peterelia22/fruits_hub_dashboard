@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_text_field.dart';
+import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/image_field.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -19,30 +22,36 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
         child: Form(
             key: formKey,
             autovalidateMode: autovalidateMode,
-            child: const Column(
+            child: Column(
               children: [
-                CustomTextFormField(
+                const CustomTextFormField(
                     hintText: 'Product Name', keyboardType: TextInputType.text),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                CustomTextFormField(
+                const CustomTextFormField(
+                    hintText: 'Product Price',
+                    keyboardType: TextInputType.number),
+                const SizedBox(
+                  height: 16,
+                ),
+                const CustomTextFormField(
+                    hintText: 'Product Code',
+                    keyboardType: TextInputType.number),
+                const SizedBox(
+                  height: 16,
+                ),
+                const CustomTextFormField(
                   hintText: 'Product Description',
                   keyboardType: TextInputType.text,
                   maxLines: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                CustomTextFormField(
-                    hintText: 'Product Price',
-                    keyboardType: TextInputType.number),
-                SizedBox(
-                  height: 16,
-                ),
-                CustomTextFormField(
-                    hintText: 'Product Code',
-                    keyboardType: TextInputType.number),
+                ImageField(
+                  onFileSelected: (image) {},
+                )
               ],
             )),
       ),
