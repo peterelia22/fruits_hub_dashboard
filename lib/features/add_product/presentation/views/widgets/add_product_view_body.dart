@@ -51,7 +51,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               ),
               CustomTextFormField(
                   onSaved: (value) {
-                    code = value!;
+                    code = value!.toLowerCase();
                   },
                   hintText: 'Product Code',
                   keyboardType: TextInputType.number),
