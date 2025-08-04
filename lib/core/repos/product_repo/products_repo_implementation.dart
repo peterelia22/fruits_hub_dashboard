@@ -4,5 +4,8 @@ import 'package:fruits_hub_dashboard/features/add_product/domain/entites/add_pro
 
 class ProductsRepoImplementation implements ProductsRepo {
   @override
-  Future<void> addProduct(AddProductInputEntity product) {}
+  Future<void> addProduct(AddProductInputEntity product) {
+    // TODO: implement addProduct
+    throw UnimplementedError();
+  }
 }
