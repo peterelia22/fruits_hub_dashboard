@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_text_field.dart';
 import 'package:fruits_hub_dashboard/features/add_product/domain/entites/add_product_input_entity.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/custom_check_box.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/image_field.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/is_featured_checkbox.dart';
+
+import '../../manager/cubit/add_product_cubit.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -97,6 +100,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                                 price: price,
                                 imageFile: imageFile!,
                                 isFeatured: isFeatured);
+                        context.read<AddProductCubit>().addProduct(inputEntity);
                       } else {
                         autovalidateMode = AutovalidateMode.always;
                         setState(() {});
