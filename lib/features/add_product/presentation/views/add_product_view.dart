@@ -8,6 +8,8 @@ import '../../../../core/widgets/build_app_bar.dart';
 import 'widgets/add_product_view_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'widgets/add_product_view_body_bloc_builder.dart';
+
 class AddProductView extends StatelessWidget {
   const AddProductView({super.key});
   static const String routeName = 'add-product';
@@ -18,7 +20,7 @@ class AddProductView extends StatelessWidget {
       body: BlocProvider(
         create: (context) =>
             AddProductCubit(getIt.get<ImagesRepo>(), getIt.get<ProductsRepo>()),
-        child: const AddProductViewBody(),
+        child: const AddProductViewBodyBlocBuilder(),
       ),
     );
   }

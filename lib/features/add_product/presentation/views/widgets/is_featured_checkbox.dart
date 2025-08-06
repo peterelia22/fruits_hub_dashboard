@@ -3,15 +3,16 @@ import 'package:fruits_hub_dashboard/core/utils/app_text_styles.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/custom_check_box.dart'
     show CustomCheckBox;
 
-class isFeaturedCheckBox extends StatefulWidget {
-  const isFeaturedCheckBox({super.key, required this.onChanged});
+class isCheckBox extends StatefulWidget {
+  const isCheckBox({super.key, required this.onChanged, required this.text});
   final ValueChanged<bool> onChanged;
+  final String text;
   @override
-  State<isFeaturedCheckBox> createState() => _isFeaturedCheckBoxState();
+  State<isCheckBox> createState() => _isCheckBoxState();
 }
 
-class _isFeaturedCheckBoxState extends State<isFeaturedCheckBox> {
-  bool isTermsAccepted = false;
+class _isCheckBoxState extends State<isCheckBox> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,7 +21,7 @@ class _isFeaturedCheckBoxState extends State<isFeaturedCheckBox> {
           TextSpan(
             children: [
               TextSpan(
-                  text: 'Is this product featured?',
+                  text: widget.text,
                   style: TextStyles.semiBold13
                       .copyWith(color: const Color(0xFF949D9E))),
             ],
@@ -33,9 +34,9 @@ class _isFeaturedCheckBoxState extends State<isFeaturedCheckBox> {
           ),
         ),
         CustomCheckBox(
-          isChecked: isTermsAccepted,
+          isChecked: isChecked,
           onChecked: (value) {
-            isTermsAccepted = value;
+            isChecked = value;
             widget.onChanged(value);
             setState(() {});
           },

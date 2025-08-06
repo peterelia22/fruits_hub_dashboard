@@ -15,9 +15,9 @@ final getIt = GetIt.instance;
 void setupGetit() {
   getIt.registerSingleton<StorageService>(
     CloudinaryService(
-      cloudName: "dwgw0dluq", // Your Cloud Name
+      cloudName: "dwgw0dluq",
       uploadPreset: "pedroelia",
-      apiKey: '127332884684589', // Your Upload Preset
+      apiKey: '127332884684589',
     ),
   );
 

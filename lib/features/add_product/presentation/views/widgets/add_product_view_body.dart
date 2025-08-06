@@ -20,9 +20,10 @@ class AddProductViewBody extends StatefulWidget {
 
 class _AddProductViewBodyState extends State<AddProductViewBody> {
   late String name, code, description;
-  late num price;
+  late num price, expirationMonths, numOfCalories, gramAmount;
   File? imageFile;
   bool isFeatured = false;
+  bool isOrganic = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
@@ -63,6 +64,33 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                 height: 16,
               ),
               CustomTextFormField(
+                  onSaved: (value) {
+                    expirationMonths = num.parse(value!);
+                  },
+                  hintText: 'Expiration Months',
+                  keyboardType: TextInputType.number),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
+                  onSaved: (value) {
+                    numOfCalories = num.parse(value!);
+                  },
+                  hintText: 'Number of Calories',
+                  keyboardType: TextInputType.number),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
+                  onSaved: (value) {
+                    gramAmount = num.parse(value!);
+                  },
+                  hintText: 'Gram Amount',
+                  keyboardType: TextInputType.number),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
                 onSaved: (value) {
                   description = value!;
                 },
@@ -81,9 +109,19 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              isFeaturedCheckBox(onChanged: (value) {
-                isFeatured = value;
-              }),
+              isCheckBox(
+                  text: 'Is this product featured?',
+                  onChanged: (value) {
+                    isFeatured = value;
+                  }),
+              const SizedBox(
+                height: 16,
+              ),
+              isCheckBox(
+                  text: 'Is this product Organic?',
+                  onChanged: (value) {
+                    isOrganic = value;
+                  }),
               const SizedBox(
                 height: 16,
               ),
@@ -99,7 +137,11 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                                 description: description,
                                 price: price,
                                 imageFile: imageFile!,
-                                isFeatured: isFeatured);
+                                isFeatured: isFeatured,
+                                expirationMonths: expirationMonths.toInt(),
+                                numOfCalories: numOfCalories.toInt(),
+                                gramAmount: gramAmount.toInt(),
+                                isOrganic: isOrganic);
                         context.read<AddProductCubit>().addProduct(inputEntity);
                       } else {
                         autovalidateMode = AutovalidateMode.always;
