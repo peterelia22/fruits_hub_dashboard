@@ -141,7 +141,8 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                                 expirationMonths: expirationMonths.toInt(),
                                 numOfCalories: numOfCalories.toInt(),
                                 gramAmount: gramAmount.toInt(),
-                                isOrganic: isOrganic);
+                                isOrganic: isOrganic,
+                                reviews: []);
                         context.read<AddProductCubit>().addProduct(inputEntity);
                       } else {
                         autovalidateMode = AutovalidateMode.always;
