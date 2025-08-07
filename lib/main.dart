@@ -4,6 +4,7 @@ import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/services/get_it_service.dart';
+import 'package:fruits_hub_dashboard/core/services/supbase_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'constants.dart';
@@ -14,13 +15,11 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(url: kSupbaseUrl, anonKey: kSupabaseAnonKey);
+  await SupbaseStorageService.initSupabase();
   Bloc.observer = CustomBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  CloudinaryContext.cloudinary =
-      Cloudinary.fromCloudName(cloudName: kCloudinaryCloudName);
 
   setupGetit();
 
