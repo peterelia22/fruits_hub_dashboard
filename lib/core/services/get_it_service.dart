@@ -4,6 +4,7 @@ import 'package:fruits_hub_dashboard/core/services/database_service.dart';
 import 'package:fruits_hub_dashboard/core/services/firestore_service.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../constants.dart';
 import '../repos/images_repo/images_repo.dart';
 import '../repos/product_repo/products_repo.dart';
 import '../repos/product_repo/products_repo_implementation.dart';
@@ -15,9 +16,9 @@ final getIt = GetIt.instance;
 void setupGetit() {
   getIt.registerSingleton<StorageService>(
     CloudinaryService(
-      cloudName: "dwgw0dluq",
-      uploadPreset: "pedroelia",
-      apiKey: '127332884684589',
+      cloudName: kCloudinaryCloudName,
+      uploadPreset: kCloudinaryuploadPreset,
+      apiKey: kCloudinaryApiKey,
     ),
   );
 
