@@ -10,16 +10,20 @@ import '../repos/product_repo/products_repo.dart';
 import '../repos/product_repo/products_repo_implementation.dart';
 import 'cloudinary_service.dart';
 import 'storage_service.dart';
+import 'supbase_storage.dart';
 
 final getIt = GetIt.instance;
 
 void setupGetit() {
+  // getIt.registerSingleton<StorageService>(
+  //   CloudinaryService(
+  //     cloudName: kCloudinaryCloudName,
+  //     uploadPreset: kCloudinaryuploadPreset,
+  //     apiKey: kCloudinaryApiKey,
+  //   ),
+  // );
   getIt.registerSingleton<StorageService>(
-    CloudinaryService(
-      cloudName: kCloudinaryCloudName,
-      uploadPreset: kCloudinaryuploadPreset,
-      apiKey: kCloudinaryApiKey,
-    ),
+    SupbaseStorageService(),
   );
 
   getIt.registerSingleton<ImagesRepo>(
