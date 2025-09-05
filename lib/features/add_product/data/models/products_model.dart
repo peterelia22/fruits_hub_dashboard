@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:fruits_hub_dashboard/features/add_product/data/models/review_model.dart';
-import 'package:fruits_hub_dashboard/features/add_product/domain/entites/add_product_input_entity.dart';
+import 'package:fruits_hub_dashboard/features/add_product/domain/entites/products_entity.dart';
 
-class AddProductInputModel {
+class ProductsModel {
   final String name;
   final String code;
   final String description;
@@ -18,22 +18,24 @@ class AddProductInputModel {
   final num avgRating = 0;
   final num numOfRatings = 0;
   final List<ReviewModel> reviews;
-  AddProductInputModel(
-      {required this.name,
-      this.imageUrl,
-      required this.code,
-      required this.description,
-      required this.expirationMonths,
-      required this.numOfCalories,
-      required this.gramAmount,
-      required this.price,
-      required this.imageFile,
-      required this.isFeatured,
-      required this.reviews,
-      required this.isOrganic});
-  factory AddProductInputModel.fromEntity(
-      AddProductInputEntity addProductInputEntity) {
-    return AddProductInputModel(
+  final int sellingCount;
+  ProductsModel({
+    required this.name,
+    this.imageUrl,
+    required this.code,
+    required this.description,
+    required this.expirationMonths,
+    required this.numOfCalories,
+    required this.gramAmount,
+    required this.price,
+    required this.imageFile,
+    required this.isFeatured,
+    required this.reviews,
+    required this.isOrganic,
+    this.sellingCount = 0,
+  });
+  factory ProductsModel.fromEntity(ProductsEntity addProductInputEntity) {
+    return ProductsModel(
       name: addProductInputEntity.name,
       code: addProductInputEntity.code,
       description: addProductInputEntity.description,
@@ -63,6 +65,7 @@ class AddProductInputModel {
       'gramAmount': gramAmount,
       'isOrganic': isOrganic,
       'reviews': reviews.map((review) => review.toJson()).toList(),
+      'sellingCount': sellingCount,
     };
   }
 }

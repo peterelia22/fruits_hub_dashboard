@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/widgets/custom_text_field.dart';
-import 'package:fruits_hub_dashboard/features/add_product/domain/entites/add_product_input_entity.dart';
+import 'package:fruits_hub_dashboard/features/add_product/domain/entites/products_entity.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/custom_check_box.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/image_field.dart';
 import 'package:fruits_hub_dashboard/features/add_product/presentation/views/widgets/is_featured_checkbox.dart';
@@ -130,19 +130,18 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                     if (imageFile != null) {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
-                        AddProductInputEntity inputEntity =
-                            AddProductInputEntity(
-                                name: name,
-                                code: code,
-                                description: description,
-                                price: price,
-                                imageFile: imageFile!,
-                                isFeatured: isFeatured,
-                                expirationMonths: expirationMonths.toInt(),
-                                numOfCalories: numOfCalories.toInt(),
-                                gramAmount: gramAmount.toInt(),
-                                isOrganic: isOrganic,
-                                reviews: []);
+                        ProductsEntity inputEntity = ProductsEntity(
+                            name: name,
+                            code: code,
+                            description: description,
+                            price: price,
+                            imageFile: imageFile!,
+                            isFeatured: isFeatured,
+                            expirationMonths: expirationMonths.toInt(),
+                            numOfCalories: numOfCalories.toInt(),
+                            gramAmount: gramAmount.toInt(),
+                            isOrganic: isOrganic,
+                            reviews: []);
                         context.read<AddProductCubit>().addProduct(inputEntity);
                       } else {
                         autovalidateMode = AutovalidateMode.always;

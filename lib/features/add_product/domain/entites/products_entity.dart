@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'review_entity.dart';
 
-class AddProductInputEntity {
+class ProductsEntity {
   final String name;
   final String code;
   final String description;
@@ -17,7 +17,7 @@ class AddProductInputEntity {
   final num avgRating = 0;
   final num numOfRatings = 0;
   final List<ReviewEntity> reviews;
-  AddProductInputEntity(
+  ProductsEntity(
       {required this.name,
       this.imageUrl,
       required this.code,
