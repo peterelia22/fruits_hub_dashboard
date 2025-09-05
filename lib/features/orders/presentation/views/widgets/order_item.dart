@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_entity.dart';
 
+import '../../../../../core/enums/order_enum.dart';
 import '../../../data/models/order_model.dart';
 
 class OrderDisplayWidget extends StatelessWidget {
@@ -24,21 +25,22 @@ class OrderDisplayWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Order #${order.uID.substring(0, 8)}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: order.status == OrderEnum.pending
+                        ? Colors.orange
+                        : order.status == OrderEnum.confirmed
+                            ? Colors.green
+                            : order.status == OrderEnum.delivered
+                                ? Colors.blue
+                                : order.status == OrderEnum.cancelled
+                                    ? Colors.red
+                                    : Colors.grey,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    'Pending',
+                    order.status.name,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -47,7 +49,14 @@ class OrderDisplayWidget extends StatelessWidget {
                 ),
               ],
             ),
-
+            SizedBox(height: 12),
+            Text(
+              'User Id: ${order.uID}',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             SizedBox(height: 12),
 
             // Products List

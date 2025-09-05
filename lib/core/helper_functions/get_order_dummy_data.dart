@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fruits_hub_dashboard/core/enums/order_enum.dart';
 import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_entity.dart';
 import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_product_entity.dart';
 import 'package:fruits_hub_dashboard/features/orders/domain/entities/shipping_address_entity.dart';
@@ -54,6 +55,7 @@ OrderEntity createSampleOrder() {
 
   // Create and return the order
   return OrderEntity(
+    status: OrderEnum.pending,
     totalPrice: totalPrice,
     uID: 'USER${Random().nextInt(999999).toString().padLeft(6, '0')}',
     shippingAddressEntity: shippingAddress,
@@ -204,6 +206,7 @@ List<OrderEntity> createMultipleSampleOrders(int count) {
 
     orders.add(
       OrderEntity(
+        status: OrderEnum.pending,
         totalPrice: totalPrice,
         uID: 'USER${random.nextInt(999999).toString().padLeft(6, '0')}',
         shippingAddressEntity: shippingAddress,
@@ -219,6 +222,7 @@ List<OrderEntity> createMultipleSampleOrders(int count) {
 // Method to create an empty order template
 OrderEntity createEmptyOrder() {
   return OrderEntity(
+    status: OrderEnum.pending,
     totalPrice: 0.0,
     uID: '',
     shippingAddressEntity: ShippingAddressEntity(
@@ -269,6 +273,7 @@ OrderEntity createCustomOrder({
       .toList();
 
   return OrderEntity(
+    status: OrderEnum.pending,
     totalPrice: totalPrice,
     uID: userID,
     shippingAddressEntity: shippingAddress,
@@ -278,8 +283,10 @@ OrderEntity createCustomOrder({
 }
 
 // Method to create a quick test order
+
 OrderEntity createQuickTestOrder() {
   return OrderEntity(
+    status: OrderEnum.pending,
     totalPrice: 29.99,
     uID: 'TESTUSER001',
     shippingAddressEntity: ShippingAddressEntity(
