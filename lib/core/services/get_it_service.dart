@@ -2,6 +2,8 @@ import 'package:fruits_hub_dashboard/core/repos/images_repo/images_repo_implemen
     show ImagesRepoImplementation;
 import 'package:fruits_hub_dashboard/core/services/database_service.dart';
 import 'package:fruits_hub_dashboard/core/services/firestore_service.dart';
+import 'package:fruits_hub_dashboard/features/orders/data/repos/order_repo_impl.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/repos/orders_repo.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../constants.dart';
@@ -33,4 +35,7 @@ void setupGetit() {
   getIt.registerSingleton<ProductsRepo>(ProductsRepoImplementation(
     getIt.get<DatabaseService>(),
   ));
+  getIt.registerSingleton<OrdersRepo>(
+    OrderRepoImpl(getIt.get<FireStoreService>()),
+  );
 }
