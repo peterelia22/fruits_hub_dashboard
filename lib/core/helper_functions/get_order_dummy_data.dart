@@ -1,14 +1,13 @@
 import 'dart:math';
 
-import 'package:fruits_hub_dashboard/features/orders/data/models/order_model.dart';
-
-import '../../features/orders/data/models/order_product_model.dart';
-import '../../features/orders/data/models/shipping_address_model.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_product_entity.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/shipping_address_entity.dart';
 
 // Method to create a sample order with all data
-OrderModel createSampleOrder() {
+OrderEntity createSampleOrder() {
   // Create sample shipping address
-  final shippingAddress = ShippingAddressModel(
+  final shippingAddress = ShippingAddressEntity(
     name: 'John Smith',
     address: '123 Main Street',
     city: 'New York',
@@ -19,7 +18,7 @@ OrderModel createSampleOrder() {
 
   // Create sample products
   final orderProducts = [
-    OrderProductModel(
+    OrderProductEntity(
       name: 'Fresh Red Apples',
       code: 'APPLE001',
       imageUrl:
@@ -27,7 +26,7 @@ OrderModel createSampleOrder() {
       price: 4.99,
       quantity: 3,
     ),
-    OrderProductModel(
+    OrderProductEntity(
       name: 'Organic Bananas',
       code: 'BANANA002',
       imageUrl:
@@ -35,7 +34,7 @@ OrderModel createSampleOrder() {
       price: 2.99,
       quantity: 2,
     ),
-    OrderProductModel(
+    OrderProductEntity(
       name: 'Fresh Orange Juice',
       code: 'JUICE003',
       imageUrl:
@@ -54,18 +53,18 @@ OrderModel createSampleOrder() {
   totalPrice += 5.99;
 
   // Create and return the order
-  return OrderModel(
+  return OrderEntity(
     totalPrice: totalPrice,
     uID: 'USER${Random().nextInt(999999).toString().padLeft(6, '0')}',
-    shippingAddressModel: shippingAddress,
+    shippingAddressEntity: shippingAddress,
     orderProducts: orderProducts,
     paymentMethod: 'Cash',
   );
 }
 
 // Method to create multiple sample orders
-List<OrderModel> createMultipleSampleOrders(int count) {
-  final List<OrderModel> orders = [];
+List<OrderEntity> createMultipleSampleOrders(int count) {
+  final List<OrderEntity> orders = [];
   final random = Random();
 
   final sampleNames = [
@@ -155,7 +154,7 @@ List<OrderModel> createMultipleSampleOrders(int count) {
 
   for (int i = 0; i < count; i++) {
     // Random shipping address
-    final shippingAddress = ShippingAddressModel(
+    final shippingAddress = ShippingAddressEntity(
       name: sampleNames[random.nextInt(sampleNames.length)],
       address: sampleAddresses[random.nextInt(sampleAddresses.length)],
       city: sampleCities[random.nextInt(sampleCities.length)],
@@ -172,7 +171,7 @@ List<OrderModel> createMultipleSampleOrders(int count) {
 
     // Random products (2-5 products per order)
     final numberOfProducts = random.nextInt(4) + 2;
-    final selectedProducts = <OrderProductModel>[];
+    final selectedProducts = <OrderProductEntity>[];
     final usedProducts = <int>[];
 
     for (int j = 0; j < numberOfProducts; j++) {
@@ -185,7 +184,7 @@ List<OrderModel> createMultipleSampleOrders(int count) {
       final product = sampleProducts[productIndex];
 
       selectedProducts.add(
-        OrderProductModel(
+        OrderProductEntity(
           name: product['name'] as String,
           code: product['code'] as String,
           imageUrl: product['image'] as String,
@@ -204,10 +203,10 @@ List<OrderModel> createMultipleSampleOrders(int count) {
     totalPrice += [3.99, 5.99, 7.99][random.nextInt(3)];
 
     orders.add(
-      OrderModel(
+      OrderEntity(
         totalPrice: totalPrice,
         uID: 'USER${random.nextInt(999999).toString().padLeft(6, '0')}',
-        shippingAddressModel: shippingAddress,
+        shippingAddressEntity: shippingAddress,
         orderProducts: selectedProducts,
         paymentMethod: paymentMethods[random.nextInt(paymentMethods.length)],
       ),
@@ -218,18 +217,25 @@ List<OrderModel> createMultipleSampleOrders(int count) {
 }
 
 // Method to create an empty order template
-OrderModel createEmptyOrder() {
-  return OrderModel(
+OrderEntity createEmptyOrder() {
+  return OrderEntity(
     totalPrice: 0.0,
     uID: '',
-    shippingAddressModel: ShippingAddressModel(),
+    shippingAddressEntity: ShippingAddressEntity(
+      name: null,
+      address: null,
+      city: null,
+      email: null,
+      addressDetails: null,
+      phoneNumber: null,
+    ),
     orderProducts: [],
     paymentMethod: 'Cash',
   );
 }
 
 // Method to create order with custom data
-OrderModel createCustomOrder({
+OrderEntity createCustomOrder({
   required double totalPrice,
   required String userID,
   required String customerName,
@@ -237,20 +243,22 @@ OrderModel createCustomOrder({
   required String city,
   String? email,
   String? phone,
+  String? addressDetails,
   required List<Map<String, dynamic>> products,
   required String paymentMethod,
 }) {
-  final shippingAddress = ShippingAddressModel(
+  final shippingAddress = ShippingAddressEntity(
     name: customerName,
     address: address,
     city: city,
     email: email,
+    addressDetails: addressDetails,
     phoneNumber: phone,
   );
 
   final orderProducts = products
       .map(
-        (product) => OrderProductModel(
+        (product) => OrderProductEntity(
           name: product['name'] ?? 'Unknown Product',
           code: product['code'] ?? 'UNKNOWN',
           imageUrl: product['imageUrl'] ?? '',
@@ -260,11 +268,44 @@ OrderModel createCustomOrder({
       )
       .toList();
 
-  return OrderModel(
+  return OrderEntity(
     totalPrice: totalPrice,
     uID: userID,
-    shippingAddressModel: shippingAddress,
+    shippingAddressEntity: shippingAddress,
     orderProducts: orderProducts,
     paymentMethod: paymentMethod,
+  );
+}
+
+// Method to create a quick test order
+OrderEntity createQuickTestOrder() {
+  return OrderEntity(
+    totalPrice: 29.99,
+    uID: 'TESTUSER001',
+    shippingAddressEntity: ShippingAddressEntity(
+      name: 'Test Customer',
+      address: '123 Test Street',
+      city: 'Test City',
+      email: 'test@example.com',
+      addressDetails: 'Test Floor 1',
+      phoneNumber: '+1-555-TEST',
+    ),
+    orderProducts: [
+      OrderProductEntity(
+        name: 'Test Apple',
+        code: 'TEST001',
+        imageUrl: 'https://via.placeholder.com/150',
+        price: 9.99,
+        quantity: 1,
+      ),
+      OrderProductEntity(
+        name: 'Test Orange',
+        code: 'TEST002',
+        imageUrl: 'https://via.placeholder.com/150',
+        price: 19.99,
+        quantity: 1,
+      ),
+    ],
+    paymentMethod: 'Cash',
   );
 }

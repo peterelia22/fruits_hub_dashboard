@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub_dashboard/features/orders/domain/entities/order_entity.dart';
 
 import '../../../data/models/order_model.dart';
 
 class OrderDisplayWidget extends StatelessWidget {
-  final OrderModel order;
+  final OrderEntity order;
 
   const OrderDisplayWidget({
     Key? key,
@@ -142,18 +143,18 @@ class OrderDisplayWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (order.shippingAddressModel.name != null)
+                  if (order.shippingAddressEntity.name != null)
                     Text(
-                      order.shippingAddressModel.name!,
+                      order.shippingAddressEntity.name!,
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                  if (order.shippingAddressModel.address != null)
-                    Text(order.shippingAddressModel.address!),
-                  if (order.shippingAddressModel.city != null)
-                    Text(order.shippingAddressModel.city!),
-                  if (order.shippingAddressModel.phoneNumber != null)
+                  if (order.shippingAddressEntity.address != null)
+                    Text(order.shippingAddressEntity.address!),
+                  if (order.shippingAddressEntity.city != null)
+                    Text(order.shippingAddressEntity.city!),
+                  if (order.shippingAddressEntity.phoneNumber != null)
                     Text(
-                      'Phone: ${order.shippingAddressModel.phoneNumber!}',
+                      'Phone: ${order.shippingAddressEntity.phoneNumber!}',
                       style: TextStyle(color: Colors.grey[600], fontSize: 12),
                     ),
                 ],
@@ -223,7 +224,7 @@ class OrderDisplayWidget extends StatelessWidget {
 }
 
 class SimpleOrderList extends StatelessWidget {
-  final List<OrderModel> orders;
+  final List<OrderEntity> orders;
 
   const SimpleOrderList({
     Key? key,
