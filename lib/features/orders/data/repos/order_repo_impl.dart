@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fruits_hub_dashboard/core/enums/order_enum.dart';
 import 'package:fruits_hub_dashboard/core/errors/failures.dart';
 import 'package:fruits_hub_dashboard/core/services/database_service.dart';
 import 'package:fruits_hub_dashboard/core/utils/backend_endpoint.dart';
@@ -24,6 +25,19 @@ class OrderRepoImpl implements OrdersRepo {
       }
     } catch (e) {
       yield Left(ServerFailure('Failed to fetch orders'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateOrderStatus(
+      {required OrderStatusEnum status, required String orderId}) async {
+    try {
+      await databaseService.updateData(data: {
+        'status': status.name,
+      }, path: BackendEndpoint.getOrders, documentId: orderId);
+      return right(null);
+    } catch (e) {
+      return Left(ServerFailure('Failed to update order'));
     }
   }
 }

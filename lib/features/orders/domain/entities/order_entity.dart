@@ -11,7 +11,7 @@ class OrderEntity {
   final ShippingAddressEntity shippingAddressEntity;
   final List<OrderProductEntity> orderProducts;
   final String paymentMethod;
-  final OrderEnum status;
+  final OrderStatusEnum status;
 
   OrderEntity(
       {required this.totalPrice,

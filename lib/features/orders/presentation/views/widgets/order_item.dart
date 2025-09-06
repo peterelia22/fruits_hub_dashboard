@@ -28,13 +28,13 @@ class OrderDisplayWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: order.status == OrderEnum.pending
+                    color: order.status == OrderStatusEnum.pending
                         ? Colors.orange
-                        : order.status == OrderEnum.confirmed
+                        : order.status == OrderStatusEnum.confirmed
                             ? Colors.green
-                            : order.status == OrderEnum.delivered
+                            : order.status == OrderStatusEnum.delivered
                                 ? Colors.blue
-                                : order.status == OrderEnum.cancelled
+                                : order.status == OrderStatusEnum.cancelled
                                     ? Colors.red
                                     : Colors.grey,
                     borderRadius: BorderRadius.circular(12),

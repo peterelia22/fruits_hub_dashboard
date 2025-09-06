@@ -55,7 +55,7 @@ OrderEntity createSampleOrder() {
 
   // Create and return the order
   return OrderEntity(
-    status: OrderEnum.pending,
+    status: OrderStatusEnum.pending,
     totalPrice: totalPrice,
     uID: 'USER${Random().nextInt(999999).toString().padLeft(6, '0')}',
     shippingAddressEntity: shippingAddress,
@@ -206,7 +206,7 @@ List<OrderEntity> createMultipleSampleOrders(int count) {
 
     orders.add(
       OrderEntity(
-        status: OrderEnum.pending,
+        status: OrderStatusEnum.pending,
         totalPrice: totalPrice,
         uID: 'USER${random.nextInt(999999).toString().padLeft(6, '0')}',
         shippingAddressEntity: shippingAddress,
@@ -222,7 +222,7 @@ List<OrderEntity> createMultipleSampleOrders(int count) {
 // Method to create an empty order template
 OrderEntity createEmptyOrder() {
   return OrderEntity(
-    status: OrderEnum.pending,
+    status: OrderStatusEnum.pending,
     totalPrice: 0.0,
     uID: '',
     shippingAddressEntity: ShippingAddressEntity(
@@ -273,7 +273,7 @@ OrderEntity createCustomOrder({
       .toList();
 
   return OrderEntity(
-    status: OrderEnum.pending,
+    status: OrderStatusEnum.pending,
     totalPrice: totalPrice,
     uID: userID,
     shippingAddressEntity: shippingAddress,
@@ -286,7 +286,7 @@ OrderEntity createCustomOrder({
 
 OrderEntity createQuickTestOrder() {
   return OrderEntity(
-    status: OrderEnum.pending,
+    status: OrderStatusEnum.pending,
     totalPrice: 29.99,
     uID: 'TESTUSER001',
     shippingAddressEntity: ShippingAddressEntity(
