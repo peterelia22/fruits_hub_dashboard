@@ -5,6 +5,8 @@ abstract class DatabaseService {
       String? documentId});
   Future<dynamic> getData(
       {required String path, String? documentId, Map<String, dynamic>? query});
+  Stream<dynamic> streamData(
+      {required String path, Map<String, dynamic>? query});
   Future<bool> checksIfDataExists(
       {required String path, required String documentId});
 }
