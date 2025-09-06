@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/helper_functions/get_order_dummy_data.dart';
 import 'package:fruits_hub_dashboard/core/services/get_it_service.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/manager/fetch_orders/fetch_orders_cubit.dart';
+import 'package:fruits_hub_dashboard/features/orders/presentation/manager/update_order/update_order_cubit.dart';
 import 'package:fruits_hub_dashboard/features/orders/presentation/views/widgets/order_view_body.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -13,8 +14,15 @@ class OrderView extends StatelessWidget {
   static const String routeName = 'orders';
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FetchOrdersCubit(getIt.get<OrdersRepo>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => FetchOrdersCubit(getIt.get<OrdersRepo>()),
+        ),
+        BlocProvider(
+          create: (context) => UpdateOrderCubit(getIt.get<OrdersRepo>()),
+        )
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Orders'),
